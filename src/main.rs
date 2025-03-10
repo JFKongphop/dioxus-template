@@ -8,7 +8,7 @@ fn main() {
 }
 
 fn App() -> Element {
-  let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8"];
+  let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8", , "item 9"];
 
   rsx! {
     document::Stylesheet {
