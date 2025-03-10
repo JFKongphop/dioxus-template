@@ -3,4 +3,6 @@
 [web.app]
 
 # HTML title tag content
-title = "dioxus-vercel"
+title = "dioxus-template"
+
+favicon = "assets/JFKongphop.jpg"
