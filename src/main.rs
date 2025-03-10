@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 
-const HEADER_SVG: Asset = asset!("/assets/JFKongphop.jpg");
+const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 use dioxus_free_icons::icons::fa_brands_icons::{FaMedium, FaLinkedin, FaGithub};
 use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
@@ -41,8 +41,14 @@ fn App() -> Element {
           class: "w-full flex sm:justify-center",
           div {
             class: "flex flex-row items-center gap-2",
-            img { class: "w-8 h-8 rounded-full", src: HEADER_SVG}
-            p {  class: "text-xl", "JFKongphop" }
+            img { 
+              src: JFK_KONGPHOP,
+              class: "w-8 h-8 rounded-full"
+            } 
+            p { 
+              class: "text-xl", 
+              "JFKongphop" 
+            }
           }
         }
         div {
@@ -92,7 +98,7 @@ fn App() -> Element {
             "Full-Stack, and Distance Running"
           }
           p { 
-            class: "text-lg opacity-50",
+            class: "text-lg opacity-45",
             "I’m pursuing studies in Financial Engineering but have a strong interest in Computer Science, particularly in Blockchain technology and Full-Stack development."
             br { } 
             "I’m also passionate about track distance running."
@@ -106,7 +112,7 @@ fn App() -> Element {
 
 // let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8", "item 9"];
 
-// img { src: HEADER_SVG, class: "h-10 w-10" }
+// img { src: JFK_KONGPHOP, class: "h-10 w-10" }
 
 // p {class: "bg-bright-shade", "hello world"}
 
