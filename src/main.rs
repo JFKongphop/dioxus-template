@@ -2,6 +2,9 @@
 use dioxus::prelude::*;
 
 const HEADER_SVG: Asset = asset!("/assets/JFKongphop.jpg");
+use dioxus_free_icons::icons::fa_brands_icons::{FaMedium, FaLinkedin, FaGithub};
+use dioxus_free_icons::Icon;
+use dioxus_vercel::components::cards::link_card::LinkCard;
 
 fn main() {
   launch(App);
@@ -30,7 +33,6 @@ fn App() -> Element {
       }
     }
 
-
     div {
       class: "min-h-screen",
       div {  
@@ -41,6 +43,42 @@ fn App() -> Element {
             class: "flex flex-row items-center gap-2",
             img { class: "w-8 h-8 rounded-full", src: HEADER_SVG}
             p {  class: "text-xl", "JFKongphop" }
+          }
+        }
+        div {
+          class: "w-full flex sm:justify-center gap-2",
+          div {
+            class: "flex flex-row gap-2",
+            LinkCard {
+              icon: rsx!{Icon {
+                width: 16,
+                height: 16,
+                fill: "white",
+                icon: FaGithub,
+              }},
+              link: "https://github.com/JFKongphop".to_string(),
+              name: "Github".to_string(),
+            },
+            LinkCard {
+              icon: rsx!{Icon {
+                width: 16,
+                height: 16,
+                fill: "white",
+                icon: FaLinkedin,
+              }},
+              link: "https://www.linkedin.com/in/kongphop-kingpeth-225308236".to_string(),
+              name: "Linkedin".to_string(),
+            },
+            LinkCard {
+              icon: rsx!{Icon {
+                width: 16,
+                height: 16,
+                fill: "white",
+                icon: FaMedium,
+              }},
+              link: "https://medium.com/@kongphopkingpethp".to_string(),
+              name: "Medium".to_string(),
+            },
           }
         }
         div { 
