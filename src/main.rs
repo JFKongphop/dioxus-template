@@ -25,7 +25,7 @@ fn App() -> Element {
 
         for item in items {
 
-            li { class: "text-red-500", key: item, "{item}" }
+            li { class: "text-green-500", key: item, "{item}" }
 
         }
 
