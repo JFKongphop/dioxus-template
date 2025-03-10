@@ -8,7 +8,7 @@ fn main() {
 }
 
 fn App() -> Element {
-  let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8", , "item 9"];
+  let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8", "item 9"];
 
   rsx! {
     document::Stylesheet {
@@ -25,7 +25,7 @@ fn App() -> Element {
 
         for item in items {
 
-            li { class: "text-yellow-500", key: item, "{item}" }
+            li { class: "text-red-500", key: item, "{item}" }
 
         }
 
