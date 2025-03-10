@@ -2,7 +2,7 @@
 use dioxus::prelude::*;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
-use dioxus_free_icons::icons::fa_brands_icons::{FaMedium, FaLinkedin, FaGithub};
+use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
 
@@ -11,43 +11,41 @@ fn main() {
 }
 
 fn App() -> Element {
-
-
   rsx! {
     document::Stylesheet {
       href: asset!("/assets/tailwind.css")
     }
     head {
       link {
-          rel: "preconnect",
-          href: "https://fonts.googleapis.com"
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com"
       }
       link {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossorigin: "anonymous"
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossorigin: "anonymous"
       }
       link {
-          href: "https://fonts.googleapis.com/css2?family=Fjalla+One&family=Sixtyfour+Convergence&display=swap",
-          rel: "stylesheet"
+        href: "https://fonts.googleapis.com/css2?family=Fjalla+One&family=Sixtyfour+Convergence&display=swap",
+        rel: "stylesheet"
       }
     }
 
     div {
       class: "min-h-screen",
-      div {  
+      div {
         class: "first-screen w-full h-screen flex flex-col gap-4 justify-center items-center p-8",
         div {
           class: "w-full flex sm:justify-center",
           div {
             class: "flex flex-row items-center gap-2",
-            img { 
+            img {
               src: JFK_KONGPHOP,
               class: "w-8 h-8 rounded-full"
-            } 
-            p { 
-              class: "text-xl", 
-              "JFKongphop" 
+            }
+            p {
+              class: "text-xl",
+              "JFKongphop"
             }
           }
         }
@@ -87,9 +85,9 @@ fn App() -> Element {
             },
           }
         }
-        div { 
+        div {
           class: "flex flex-col gap-4 w-1/2 text-center max-sm:w-full max-sm:text-start max-sm:text-3xl",
-          p {  
+          p {
             class: "text-5xl leading-14 max-sm:text-3xl max-sm:leading-10",
             "Enthusiastic about"
             br {  }
@@ -97,10 +95,10 @@ fn App() -> Element {
             br {  }
             "Full-Stack, and Distance Running"
           }
-          p { 
+          p {
             class: "text-lg opacity-45",
             "I’m pursuing studies in Financial Engineering but have a strong interest in Computer Science, particularly in Blockchain technology and Full-Stack development."
-            br { } 
+            br { }
             "I’m also passionate about track distance running."
           }
         }
@@ -108,7 +106,6 @@ fn App() -> Element {
     }
   }
 }
-
 
 // let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8", "item 9"];
 
