@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #111827;
+  overflow-x: hidden;
+  color: white;
+  font-family: "Fjalla One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.first-screen {
+  height: 100vh;
+  background: linear-gradient(to top, #111827, #4b5563);
+}
+
+.second-screen {
+  background: #111827;
+}
+
+@theme {
+  --color-dark-shade: #111827;
+  --color-bright-shade: #4b5563;
+}
