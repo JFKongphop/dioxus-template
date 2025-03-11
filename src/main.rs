@@ -162,23 +162,37 @@ fn App() -> Element {
           }
         }
       }
-      div {  
-        match &*posts_resource.read() {
-          Some(Ok(posts)) => rsx! {
-              h2 { "Fetched Posts" }
-              ul {
-                  for post in posts {
-                      li { key: "{post.id}", "{post.title}" }
-                  }
-              }
-          },
-          Some(Err(err)) => rsx! {
-              p { "Failed to fetch posts: {err}" }
-          },
-          None => rsx! {
-              p { "Loading posts..." }
-          },
-      }
+      div { 
+        class: "second-screen w-full min-h-screen flex flex-col gap-4 justify-center items-center p-8",
+        div {
+          class: "w-full h-full flex flex-col gap-8 items-center text-lg max-sm:text-xs justify-center",
+          div {
+            class: "w-2/3 max-sm:w-full flex flex-col gap-6",
+            match &*contribution.read() {
+              Some(Ok(count)) => rsx! {
+                p { 
+                  class: "text-center text-2xl", 
+                  "{count} contributions last year" 
+                }
+                img {
+                  src: "https://ghchart.rshah.org/4b5563/JFKongphop",
+                  class: "w-full"
+                }
+              },
+              Some(Err(err)) => rsx! {
+                div { 
+                  "Error fetching contributions: {err}" 
+                }
+              },
+              None => rsx! {
+                p { 
+                  class: "text-center text-2xl", 
+                  "Loading contribution..." 
+                }
+              },
+            }
+          }
+        }
       }
     }
   }
@@ -198,4 +212,23 @@ fn App() -> Element {
 
 //   }
 
+// }
+
+// div {  
+//   match &*posts_resource.read() {
+//     Some(Ok(posts)) => rsx! {
+//         h2 { "Fetched Posts" }
+//         ul {
+//             for post in posts {
+//                 li { key: "{post.id}", "{post.title}" }
+//             }
+//         }
+//     },
+//     Some(Err(err)) => rsx! {
+//         p { "Failed to fetch posts: {err}" }
+//     },
+//     None => rsx! {
+//         p { "Loading posts..." }
+//     },
+//   }
 // }
