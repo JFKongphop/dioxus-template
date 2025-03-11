@@ -6,60 +6,16 @@ const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
-use dioxus_vercel::utils::github_data::{self, github_contribution};
-use reqwest::Client;
-use serde::Deserialize;
-
-#[derive(Deserialize)]
-struct DogApi {
-  message: String,
-}
-
-#[derive(Deserialize, Debug, Clone)]
-struct User {
-  id: u32,
-  name: String,
-}
-
-#[derive(Debug, Deserialize)]
-struct Post {
-  id: i32,
-  title: String,
-}
-
-async fn fetch_posts() -> Result<Vec<Post>, reqwest::Error> {
-  let client = Client::new();
-  let posts = client
-    .get("https://jsonplaceholder.typicode.com/posts")
-    .send()
-    .await?
-    .json::<Vec<Post>>()
-    .await?;
-  Ok(posts)
-}
+use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
+use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
+use dioxus_vercel::utils::github_data::github_contribution;
+use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 
 fn main() {
   launch(App);
 }
 
 fn App() -> Element {
-  let mut img_src = use_signal(|| "".to_string());
-  let posts_resource = use_resource(move || fetch_posts());
-  // let mut users = use_signal(|| Vec::<User>::new());
-
-  info!("hello world");
-
-  println!("hello");
-
-  let users = use_future(async move || {
-    reqwest::get("https://jsonplaceholder.typicode.com/users")
-      .await
-      .unwrap()
-      .json::<Vec<User>>()
-      .await
-      .unwrap()
-  });
-
   let contribution = use_resource(move || github_contribution());
 
   match &*contribution.read() {
@@ -190,43 +146,31 @@ fn App() -> Element {
               },
             }
           }
+          div {
+            class: "w-2/3 max-sm:w-full flex flex-col gap-6",
+            p {  
+              class: "text-center text-2xl",
+              {"Tech Stacks"}
+            }
+            div {  
+              class: "grid grid-cols-4 max-sm:grid-cols-2 col-span-1 gap-2",
+              for tech_stack in &*TECH_STACK {
+                TechStackCard { 
+                  element: rsx!{
+                    p {
+                      {tech_stack.key.clone()}
+                    }
+                    TechStackDescriptionCard {
+                      description: tech_stack.description.clone()
+                    }
+                  },
+                  key: tech_stack.key
+                }
+              }
+            }
+          }
         }
       }
     }
   }
 }
-
-// let items = vec!["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "item 8", "item 9"];
-
-// img { src: JFK_KONGPHOP, class: "h-10 w-10" }
-
-// p {class: "bg-bright-shade", "hello world"}
-
-// ul {
-
-//   for user in users {
-
-//       li { class: "text-green-500", key: item, "{item}" }
-
-//   }
-
-// }
-
-// div {
-//   match &*posts_resource.read() {
-//     Some(Ok(posts)) => rsx! {
-//         h2 { "Fetched Posts" }
-//         ul {
-//             for post in posts {
-//                 li { key: "{post.id}", "{post.title}" }
-//             }
-//         }
-//     },
-//     Some(Err(err)) => rsx! {
-//         p { "Failed to fetch posts: {err}" }
-//     },
-//     None => rsx! {
-//         p { "Loading posts..." }
-//     },
-//   }
-// }
