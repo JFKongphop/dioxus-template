@@ -28,3 +28,50 @@ body {
   --color-dark-shade: #111827;
   --color-bright-shade: #4b5563;
 }
+
+.slider-container {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(to top, #4b5563, #111827);
+}
+
+.slider {
+  display: flex;
+  animation: slide 10s linear infinite;
+}
+
+.slide {
+  min-width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  gap: 4px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.slider .slide:nth-child(2) {
+  background: linear-gradient(to top, #4b5563, #111827);
+}
+
+.slider .slide:nth-child(3) {
+  background: linear-gradient(to top, #4b5563, #111827);
+}
+
+.slider .slide:nth-child(4) {
+  background: linear-gradient(to top, #4b5563, #111827);
+}

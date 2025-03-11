@@ -3,6 +3,7 @@ use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
+const DIOXUS: Asset = asset!("/assets/dioxus.png");
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
@@ -167,6 +168,30 @@ fn App() -> Element {
                   key: tech_stack.key
                 }
               }
+            }
+          }
+        }
+      }
+      div {  
+        class: "slider-container",
+        div { 
+          class: "slider",
+          div {  
+            class: "slide",
+            p {"POWERED BY"}
+            p {"DIOXUS"}
+            img {  
+              src: DIOXUS,
+              class: "w-8 h-8"
+            }
+          }
+          div {  
+            class: "slide",
+            p {"POWERED BY"}
+            p {"DIOXUS"}
+            img {  
+              src: DIOXUS,
+              class: "w-8 h-8"
             }
           }
         }
