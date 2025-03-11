@@ -10626,6 +10626,9 @@
   .border-blue-900 {
     border-color: var(--color-blue-900);
   }
+  .border-bright-shade {
+    border-color: var(--color-bright-shade);
+  }
   .border-current {
     border-color: currentColor;
   }
@@ -29788,6 +29791,13 @@
   .ring-inset {
     --tw-ring-inset: inset;
   }
+  .hover\:border-white {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-white);
+      }
+    }
+  }
   .hover\:bg-gray-700 {
     &:hover {
       @media (hover: hover) {
@@ -29836,6 +29846,11 @@
     @media (width < 40rem) {
       font-size: var(--text-xs);
       line-height: var(--tw-leading, var(--text-xs--line-height));
+    }
+  }
+  .max-sm\:text-\[8px\] {
+    @media (width < 40rem) {
+      font-size: 8px;
     }
   }
   .max-sm\:leading-10 {
