@@ -1,16 +1,75 @@
 #![allow(non_snake_case)]
+use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
+use dioxus_vercel::utils::github_data::{self, github_contribution};
+use reqwest::Client;
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct DogApi {
+  message: String,
+}
+
+#[derive(Deserialize, Debug, Clone)]
+struct User {
+  id: u32,
+  name: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct Post {
+    id: i32,
+    title: String,
+}
+
+async fn fetch_posts() -> Result<Vec<Post>, reqwest::Error> {
+    let client = Client::new();
+    let posts = client 
+        .get("https://jsonplaceholder.typicode.com/posts")
+        .send()
+        .await?
+        .json::<Vec<Post>>()
+        .await?;
+    Ok(posts)
+}
 
 fn main() {
   launch(App);
 }
 
 fn App() -> Element {
+  let mut img_src = use_signal(|| "".to_string());
+  let posts_resource = use_resource(move || fetch_posts());
+  // let mut users = use_signal(|| Vec::<User>::new());
+
+    info!("hello world");
+
+    println!("hello");
+
+    let users = use_future(async move || {
+      reqwest::get("https://jsonplaceholder.typicode.com/users")
+          .await
+          .unwrap()
+          .json::<Vec<User>>()
+          .await
+          .unwrap()
+  });
+
+  let contribution =   use_resource(move || github_contribution());
+
+  match &*contribution.read() {
+    Some(Ok(count)) => info!("hello world {}", count),
+    Some(Err(err)) => println!("Error fetching contributions: {}", err),
+    None => println!("Loading contributions..."),
+  }
+
+
+
   rsx! {
     document::Stylesheet {
       href: asset!("/assets/tailwind.css")
@@ -103,6 +162,24 @@ fn App() -> Element {
           }
         }
       }
+      div {  
+        match &*posts_resource.read() {
+          Some(Ok(posts)) => rsx! {
+              h2 { "Fetched Posts" }
+              ul {
+                  for post in posts {
+                      li { key: "{post.id}", "{post.title}" }
+                  }
+              }
+          },
+          Some(Err(err)) => rsx! {
+              p { "Failed to fetch posts: {err}" }
+          },
+          None => rsx! {
+              p { "Loading posts..." }
+          },
+      }
+      }
     }
   }
 }
@@ -115,7 +192,7 @@ fn App() -> Element {
 
 // ul {
 
-//   for item in items {
+//   for user in users {
 
 //       li { class: "text-green-500", key: item, "{item}" }
 
