@@ -1229,6 +1229,7 @@ dependencies = [
  "dioxus",
  "dioxus-free-icons",
  "dioxus-tailwindcss",
+ "lazy_static",
  "reqwest",
  "serde",
 ]

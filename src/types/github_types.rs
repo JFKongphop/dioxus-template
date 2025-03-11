@@ -12,5 +12,5 @@ pub struct Contribution {
 #[derive(Clone, Deserialize, Debug)]
 pub struct GithubResponse {
   pub total: HashMap<String, u32>,
-  pub  contributions: HashMap<u32, HashMap<u32, HashMap<u32, Contribution>>>,
+  pub contributions: HashMap<u32, HashMap<u32, HashMap<u32, Contribution>>>,
 }

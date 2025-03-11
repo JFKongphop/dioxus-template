@@ -23,19 +23,19 @@ struct User {
 
 #[derive(Debug, Deserialize)]
 struct Post {
-    id: i32,
-    title: String,
+  id: i32,
+  title: String,
 }
 
 async fn fetch_posts() -> Result<Vec<Post>, reqwest::Error> {
-    let client = Client::new();
-    let posts = client 
-        .get("https://jsonplaceholder.typicode.com/posts")
-        .send()
-        .await?
-        .json::<Vec<Post>>()
-        .await?;
-    Ok(posts)
+  let client = Client::new();
+  let posts = client
+    .get("https://jsonplaceholder.typicode.com/posts")
+    .send()
+    .await?
+    .json::<Vec<Post>>()
+    .await?;
+  Ok(posts)
 }
 
 fn main() {
@@ -47,28 +47,26 @@ fn App() -> Element {
   let posts_resource = use_resource(move || fetch_posts());
   // let mut users = use_signal(|| Vec::<User>::new());
 
-    info!("hello world");
+  info!("hello world");
 
-    println!("hello");
+  println!("hello");
 
-    let users = use_future(async move || {
-      reqwest::get("https://jsonplaceholder.typicode.com/users")
-          .await
-          .unwrap()
-          .json::<Vec<User>>()
-          .await
-          .unwrap()
+  let users = use_future(async move || {
+    reqwest::get("https://jsonplaceholder.typicode.com/users")
+      .await
+      .unwrap()
+      .json::<Vec<User>>()
+      .await
+      .unwrap()
   });
 
-  let contribution =   use_resource(move || github_contribution());
+  let contribution = use_resource(move || github_contribution());
 
   match &*contribution.read() {
     Some(Ok(count)) => info!("hello world {}", count),
     Some(Err(err)) => println!("Error fetching contributions: {}", err),
     None => println!("Loading contributions..."),
   }
-
-
 
   rsx! {
     document::Stylesheet {
@@ -162,7 +160,7 @@ fn App() -> Element {
           }
         }
       }
-      div { 
+      div {
         class: "second-screen w-full min-h-screen flex flex-col gap-4 justify-center items-center p-8",
         div {
           class: "w-full h-full flex flex-col gap-8 items-center text-lg max-sm:text-xs justify-center",
@@ -170,9 +168,9 @@ fn App() -> Element {
             class: "w-2/3 max-sm:w-full flex flex-col gap-6",
             match &*contribution.read() {
               Some(Ok(count)) => rsx! {
-                p { 
-                  class: "text-center text-2xl", 
-                  "{count} contributions last year" 
+                p {
+                  class: "text-center text-2xl",
+                  "{count} contributions last year"
                 }
                 img {
                   src: "https://ghchart.rshah.org/4b5563/JFKongphop",
@@ -180,14 +178,14 @@ fn App() -> Element {
                 }
               },
               Some(Err(err)) => rsx! {
-                div { 
-                  "Error fetching contributions: {err}" 
+                div {
+                  "Error fetching contributions: {err}"
                 }
               },
               None => rsx! {
-                p { 
-                  class: "text-center text-2xl", 
-                  "Loading contribution..." 
+                p {
+                  class: "text-center text-2xl",
+                  "Loading contribution..."
                 }
               },
             }
@@ -214,7 +212,7 @@ fn App() -> Element {
 
 // }
 
-// div {  
+// div {
 //   match &*posts_resource.read() {
 //     Some(Ok(posts)) => rsx! {
 //         h2 { "Fetched Posts" }
