@@ -4,6 +4,7 @@ use dioxus::prelude::*;
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
 const ZK_DEBIT: Asset = asset!("/assets/zkDebit.png");
+const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::icons::fa_solid_icons::FaLink;
 use dioxus_free_icons::Icon;
@@ -22,7 +23,7 @@ fn App() -> Element {
 
   rsx! {
     document::Stylesheet {
-      href: asset!("/assets/tailwind.css")
+      href: TAILWIND_CSS
     }
     head {
       link {
