@@ -1,2 +1,2 @@
-pub mod github_types;
-pub mod tech_stack_types;
+pub mod utils_types;
+pub mod constants_types;

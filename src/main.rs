@@ -16,8 +16,21 @@ fn main() {
   launch(App);
 }
 
+struct T {
+  e: Element,
+}
+
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
+
+  let t = T {
+    e: rsx!{Icon {
+      width: 16,
+      height: 16,
+      fill: "white",
+      icon: FaGithub,
+    }}
+  };
 
   match &*contribution.read() {
     Some(Ok(count)) => info!("hello world {}", count),

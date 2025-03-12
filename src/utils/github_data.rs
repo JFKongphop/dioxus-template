@@ -1,4 +1,4 @@
-use crate::types::github_types::{Contribution, GithubResponse};
+use crate::types::utils_types::{Contribution, GithubResponse};
 use chrono::{Datelike, Duration, NaiveDate, Utc};
 use reqwest::Client;
 

@@ -1,4 +1,4 @@
-use crate::types::tech_stack_types::TechStack;
+use crate::types::constants_types::TechStack;
 use lazy_static::lazy_static;
 
 lazy_static! {
