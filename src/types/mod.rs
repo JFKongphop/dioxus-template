@@ -1,2 +1,2 @@
-pub mod utils_types;
 pub mod constants_types;
+pub mod utils_types;

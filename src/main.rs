@@ -1,42 +1,24 @@
 #![allow(non_snake_case)]
-use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
+const ZK_DEBIT: Asset = asset!("/assets/zkDebit.png");
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
+use dioxus_free_icons::icons::fa_solid_icons::FaLink;
 use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
-use dioxus_vercel::utils::github_data::github_contribution;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
+use dioxus_vercel::utils::github_data::github_contribution;
 
 fn main() {
   launch(App);
 }
 
-struct T {
-  e: Element,
-}
-
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
-
-  let t = T {
-    e: rsx!{Icon {
-      width: 16,
-      height: 16,
-      fill: "white",
-      icon: FaGithub,
-    }}
-  };
-
-  match &*contribution.read() {
-    Some(Ok(count)) => info!("hello world {}", count),
-    Some(Err(err)) => println!("Error fetching contributions: {}", err),
-    None => println!("Loading contributions..."),
-  }
 
   rsx! {
     document::Stylesheet {
@@ -162,14 +144,14 @@ fn App() -> Element {
           }
           div {
             class: "w-2/3 max-sm:w-full flex flex-col gap-6",
-            p {  
+            p {
               class: "text-center text-2xl",
-              {"Tech Stacks"}
+              "Tech Stacks"
             }
-            div {  
+            div {
               class: "grid grid-cols-4 max-sm:grid-cols-2 col-span-1 gap-2",
               for tech_stack in &*TECH_STACK {
-                TechStackCard { 
+                TechStackCard {
                   element: rsx!{
                     p {
                       {tech_stack.key.clone()}
@@ -183,26 +165,80 @@ fn App() -> Element {
               }
             }
           }
+          div { 
+            class: "w-2/3 max-sm:w-full flex flex-col gap-6",
+            p {  
+              class: "text-center text-2xl",
+              "Hackathons"
+            }
+            div {  
+              class: "flex flex-col",
+              div {  
+                class: "w-full flex flex-row max-sm:flex-col gap-4",
+                div {  
+                  class: "w-3/5 max-sm:w-full flex flex-col justify-between gap-2",
+                  div {  
+                    class: "w-full flex flex-col gap-2",
+                    p {  
+                      class: "text-xl",
+                      "zkDebit"
+                    }
+                    p {  
+                      class: "text-base opacity-50",
+                      "zkDebit is an innovative payment platform that leverages zero-knowledge proofs (ZKPs) to enhance privacy and security in digital transactions. Unlike traditional payment systems, zkDebit eliminates the need to share sensitive details such as card numbers, CVVs, or expiration dates with merchants. Instead, users generate and submit a cryptographic proof verifying their ownership of the card and transaction validity."
+                    }
+                  }
+                  div {  
+                    class: "flex flex-row justify-between items-center",
+                    p {
+                      class: "text-base",
+                      "(Backend and Smart Contract)"
+                    }
+                    a {
+                      href: "https://ethglobal.com/showcase/zkdebit-ypjir",
+                      target: "_blank",
+                      Icon {
+                        width: 16,
+                        height: 16,
+                        fill: "white",
+                        icon: FaLink,
+                      }
+                    }
+                  }
+                }
+                div {
+                  class: "w-2/5 max-sm:w-full h-[300px]",
+                  img {
+                    src: ZK_DEBIT,
+                    class: "rounded-2xl h-full w-full"
+                  }
+                }
+              }
+            }
+          }
         }
       }
-      div {  
+      div {
+        class: "w-full h-[40px]"
+      }
+      div {
         class: "slider-container",
-        div { 
+        div {
           class: "slider",
-          div {  
+          div {
             class: "slide",
             p {"POWERED BY"}
             p {"DIOXUS"}
-            img {  
+            img {
               src: DIOXUS,
               class: "w-8 h-8"
             }
           }
-          div {  
+          div {
             class: "slide",
             p {"POWERED BY"}
             p {"DIOXUS"}
-            img {  
+            img {
               src: DIOXUS,
               class: "w-8 h-8"
             }
