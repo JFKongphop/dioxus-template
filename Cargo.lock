@@ -828,6 +828,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "dioxus-charts"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3c862cacf3989713716763def8a4b3b1ab366f691cac5bd64187aec7cb27e61f"
+dependencies = [
+ "dioxus",
+ "log",
+]
+
+[[package]]
 name = "dioxus-class"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1227,11 +1237,14 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "dioxus",
+ "dioxus-charts",
  "dioxus-free-icons",
  "dioxus-tailwindcss",
  "lazy_static",
  "reqwest",
  "serde",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]

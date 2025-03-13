@@ -1,5 +1,9 @@
 #![allow(non_snake_case)]
+use dioxus::html::q;
+use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
+use web_sys::window;
+use wasm_bindgen::prelude::*;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
@@ -20,6 +24,29 @@ fn main() {
 
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
+
+  let mut width = use_signal(|| 0);
+  let mut height = use_signal(|| 0);
+
+  use_effect(move || {
+    let w = window()
+      .expect("There should be a window")
+      .inner_width()
+      .expect("The window should have Some width")
+      .as_f64()
+      .expect("The width should be a number") as i32;
+
+    let h = window()
+      .expect("There should be a window")
+      .inner_height()
+      .expect("The window should have Some width")
+      .as_f64()
+      .expect("The width should be a number") as i32;
+
+    width.set(w - 64);
+    height.set(h - 64);
+  });
+
 
   rsx! {
     document::Stylesheet {

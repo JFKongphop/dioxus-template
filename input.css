@@ -75,3 +75,75 @@ body {
 .slider .slide:nth-child(4) {
   background: linear-gradient(to top, #4b5563, #111827);
 }
+
+
+/* .dx-chart-bar {
+  fill: #4CAF50;
+} */
+
+.dx-chart-bar {
+  fill: #4b5563; 
+  color: blue;
+}
+
+.dx-bar {
+  background: yellow;
+  fill: green;
+  color: blue
+}
+
+/* .dx-chart-bar {
+  fill: green; 
+  color: green;
+}
+
+.dx-bar {
+  fill: green;
+  color: blue
+}
+
+.dx-bar-group {
+  fill: green;
+}
+
+.dx-bar-label {
+  fill: red;
+}
+
+.dx-grid {
+  fill: red;
+}
+
+.dx-grid-line {
+  fill: red;
+}
+
+.dx-grid-label {
+  fill: red;
+}
+
+.dx-grid-labels {
+  fill: red;
+} */
+
+.dx-bar-group {
+  fill: green;
+  color: green
+}
+
+.dx-bar-label {
+  fill: blue;
+}
+
+.dx-grid {
+  fill: yellow;
+  color: yellow
+}
+
+.dx-grid-label {
+  fill: green;
+}
+
+.group:hover .group-hover\:block {
+	display: block;
+}
