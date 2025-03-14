@@ -1,22 +1,21 @@
 #![allow(non_snake_case)]
-use dioxus::html::q;
 use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
 use web_sys::window;
-use wasm_bindgen::prelude::*;
-
-const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
-const DIOXUS: Asset = asset!("/assets/dioxus.png");
-const ZK_DEBIT: Asset = asset!("/assets/zkDebit.png");
-const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::icons::fa_solid_icons::FaLink;
 use dioxus_free_icons::Icon;
+
 use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 use dioxus_vercel::utils::github_data::github_contribution;
+
+const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
+const DIOXUS: Asset = asset!("/assets/dioxus.png");
+const ZK_DEBIT: Asset = asset!("/assets/zkDebit.png");
+const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
 fn main() {
   launch(App);
@@ -45,6 +44,12 @@ fn App() -> Element {
 
     width.set(w - 64);
     height.set(h - 64);
+
+    let c = window().expect("a").document().expect("b").get_element_by_id("1").expect("c").client_height();//.as_f64().expect("d");
+
+    info!(c);
+
+
   });
 
 
@@ -246,6 +251,7 @@ fn App() -> Element {
           }
         }
       }
+      div {  id: "1",  "aaaǎ"}
       div {
         class: "w-full h-[40px]"
       }

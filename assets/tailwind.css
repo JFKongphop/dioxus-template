@@ -205,20 +205,8 @@
   .sticky {
     position: sticky;
   }
-  .z-7 {
-    z-index: 7;
-  }
   .col-span-1 {
     grid-column: span 1 / span 1;
-  }
-  .m-0 {
-    margin: calc(var(--spacing) * 0);
-  }
-  .m-3 {
-    margin: calc(var(--spacing) * 3);
-  }
-  .m-8 {
-    margin: calc(var(--spacing) * 8);
   }
   .block {
     display: block;
@@ -241,14 +229,8 @@
   .table {
     display: table;
   }
-  .h-0 {
-    height: calc(var(--spacing) * 0);
-  }
-  .h-2 {
-    height: calc(var(--spacing) * 2);
-  }
-  .h-3 {
-    height: calc(var(--spacing) * 3);
+  .h-1 {
+    height: calc(var(--spacing) * 1);
   }
   .h-4 {
     height: calc(var(--spacing) * 4);
@@ -400,23 +382,11 @@
   .bg-\[\#111827\] {
     background-color: #111827;
   }
-  .p-0 {
-    padding: calc(var(--spacing) * 0);
-  }
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
-  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
-  }
   .p-6 {
     padding: calc(var(--spacing) * 6);
-  }
-  .p-7 {
-    padding: calc(var(--spacing) * 7);
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
@@ -465,6 +435,9 @@
   .tracking-wider {
     --tw-tracking: var(--tracking-wider);
     letter-spacing: var(--tracking-wider);
+  }
+  .\!text-white {
+    color: var(--color-white) !important;
   }
   .text-white {
     color: var(--color-white);
