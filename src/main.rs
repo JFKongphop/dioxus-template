@@ -47,6 +47,8 @@ fn App() -> Element {
 
     let c = window().expect("a").document().expect("b").get_element_by_id("1").expect("c").client_height();//.as_f64().expect("d");
 
+    // window().expect("a").event().cl
+
     info!(c);
 
 
