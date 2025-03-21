@@ -1,7 +1,6 @@
 #![allow(non_snake_case)]
 use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
-use web_sys::window;
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
 use dioxus_free_icons::icons::fa_solid_icons::FaLink;
 use dioxus_free_icons::Icon;
@@ -10,6 +9,7 @@ use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
+use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
@@ -24,35 +24,32 @@ fn main() {
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
 
-  let mut width = use_signal(|| 0);
-  let mut height = use_signal(|| 0);
+  let window_data = WindowData::new();
+
+  let mut window_size = use_signal(|| (0, 0));
+  let mut element_size = use_signal(|| (0, 0));
+  let mut gl = use_signal(|| 0);
 
   use_effect(move || {
-    let w = window()
-      .expect("There should be a window")
-      .inner_width()
-      .expect("The window should have Some width")
-      .as_f64()
-      .expect("The width should be a number") as i32;
+    let screen_size = window_data.screen_size();
+    let div_size = window_data.element_id_size("first-graph");
 
-    let h = window()
-      .expect("There should be a window")
-      .inner_height()
-      .expect("The window should have Some width")
-      .as_f64()
-      .expect("The width should be a number") as i32;
-
-    width.set(w - 64);
-    height.set(h - 64);
-
-    let c = window().expect("a").document().expect("b").get_element_by_id("1").expect("c").client_height();//.as_f64().expect("d");
-
-    // window().expect("a").event().cl
-
-    info!(c);
-
-
+    window_size.set(screen_size);
+    element_size.set(div_size);
   });
+  
+  let month_days = 30;
+  use_effect(move || {
+    let first_index = element_size.read().0;
+    let graph_lenght = (first_index - (month_days * 8)) / month_days;
+
+    gl.set(graph_lenght);
+  });
+
+
+
+  info!("{:?}", gl);
+
 
 
   rsx! {
@@ -70,8 +67,8 @@ fn App() -> Element {
         crossorigin: "anonymous"
       }
       link {
-        href: "https://fonts.googleapis.com/css2?family=Fjalla+One&family=Sixtyfour+Convergence&display=swap",
-        rel: "stylesheet"
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Fjalla+One&family=Sixtyfour+Convergence&display=swap"
       }
     }
 
@@ -79,6 +76,7 @@ fn App() -> Element {
       class: "min-h-screen",
       div {
         class: "first-screen w-full h-screen flex flex-col gap-4 justify-center items-center p-8",
+        id: "first-screen",
         div {
           class: "w-full flex sm:justify-center",
           div {
@@ -150,6 +148,7 @@ fn App() -> Element {
       div {
         class: "second-screen w-full min-h-screen flex flex-col gap-4 justify-center items-center p-8",
         div {
+          id: "first-screen",
           class: "w-full h-full flex flex-col gap-8 items-center text-lg max-sm:text-xs justify-center",
           div {
             class: "w-2/3 max-sm:w-full flex flex-col gap-6",
@@ -251,9 +250,27 @@ fn App() -> Element {
               }
             }
           }
+          div {  
+            class: "w-2/3 max-sm:w-full flex flex-col gap-6 h-20",
+            id: "first-graph",
+            div {  
+              class: "w-full h-full flex flex-row gap-2",
+              for _ in (0..month_days) {
+                // class: format!("border h-full w-[25px]"),
+
+
+                div {
+                  style: format!("width: {}px; height: 100%; background-color: red;", gl),
+                  
+                }
+              }
+              
+
+
+            }
+          }
         }
       }
-      div {  id: "1",  "aaaǎ"}
       div {
         class: "w-full h-[40px]"
       }
