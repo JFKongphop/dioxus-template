@@ -9,8 +9,12 @@ use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
+use dioxus_vercel::utils::fetch_api::get_month_daily_distance;
 use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
+use wasm_bindgen::prelude::Closure;
+use wasm_bindgen::JsCast;
+use web_sys::console::info;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
@@ -23,17 +27,23 @@ fn main() {
 
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
+  let month_daily_distance = use_resource(move || get_month_daily_distance());
 
-  let window_data = WindowData::new();
+  let a = &*month_daily_distance.read();
+  
+  info!("{:#?}", a);
 
   let mut window_size = use_signal(|| (0, 0));
   let mut element_size = use_signal(|| (0, 0));
   let mut gl = use_signal(|| 0);
 
+  let cursor_position = use_signal(|| (0, 0));
+  
   use_effect(move || {
+    let window_data = WindowData::new();
     let screen_size = window_data.screen_size();
     let div_size = window_data.element_id_size("first-graph");
-
+    
     window_size.set(screen_size);
     element_size.set(div_size);
   });
@@ -41,16 +51,33 @@ fn App() -> Element {
   let month_days = 30;
   use_effect(move || {
     let first_index = element_size.read().0;
-    let graph_lenght = (first_index - (month_days * 8)) / month_days;
+    let graph_lenght = (first_index - (month_days * 16)) / month_days;
 
     gl.set(graph_lenght);
   });
 
-
-
   info!("{:?}", gl);
 
+  
+  use_effect(move || {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    let graph = document.get_element_by_id("first-graph").unwrap();
 
+    let closure = Closure::wrap(Box::new(move 
+    |event: web_sys::MouseEvent| {
+      info!("{:#?}", event.offset_x());
+    }) as Box<dyn FnMut(_)>);
+
+    graph
+      .add_event_listener_with_callback(
+        "mousemove", 
+        closure.as_ref().unchecked_ref()
+      )
+      .expect("msg");
+
+    closure.forget();    
+  });
 
   rsx! {
     document::Stylesheet {
@@ -73,6 +100,9 @@ fn App() -> Element {
     }
 
     div {
+      // onmousemove: move |evt| {
+      //   info!("{:#?}", evt);
+      // },
       class: "min-h-screen",
       div {
         class: "first-screen w-full h-screen flex flex-col gap-4 justify-center items-center p-8",
@@ -122,7 +152,7 @@ fn App() -> Element {
                 fill: "white",
                 icon: FaMedium,
               }},
-              link: "https://medium.com/@kongphopkingpethp".to_string(),
+              link: "https://medium.com/@kongphopkingpeth".to_string(),
               name: "Medium".to_string(),
             },
           }
@@ -251,17 +281,14 @@ fn App() -> Element {
             }
           }
           div {  
-            class: "w-2/3 max-sm:w-full flex flex-col gap-6 h-20",
+            class: "w-2/3 max-sm:w-full flex flex-col gap-6 h-60",
             id: "first-graph",
             div {  
-              class: "w-full h-full flex flex-row gap-2",
-              for _ in (0..month_days) {
-                // class: format!("border h-full w-[25px]"),
-
-
+              class: "w-full h-full flex flex-row gap-3 max-lg:gap-2 max-sm:gap-[6px]",
+              for _ in (0..28) {
                 div {
-                  style: format!("width: {}px; height: 100%; background-color: red;", gl),
-                  
+                  //style: format!("width: {}px; height: 100%; background-color: red;", gl),
+                  class: "w-full h-full bg-red-500"
                 }
               }
               
