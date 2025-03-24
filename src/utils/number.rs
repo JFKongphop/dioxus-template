@@ -8,6 +8,6 @@ pub fn find_max_daily_distance(date_distance: Vec<DateDistance>) -> f64 {
     .unwrap_or(0.0)
 }
 
-pub fn round_up_to_nearest_10(n: f64) -> i32 {
-  ((n / 10.0).ceil() * 10.0) as i32
+pub fn round_up_to_nearest_10(n: f64) -> f64 {
+  ((n / 10.0).ceil() * 10.0) as f64
 }

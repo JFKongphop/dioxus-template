@@ -9,6 +9,7 @@ use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
+use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
 use dioxus_vercel::utils::fetch_api::get_month_daily_distance;
 use dioxus_vercel::utils::number::{find_max_daily_distance, round_up_to_nearest_10};
 use dioxus_vercel::utils::window_data::WindowData;
@@ -34,16 +35,25 @@ fn App() -> Element {
 
   info!("{:#?}", month_daily_distance);
 
-  let max_daily_distance = match month_daily_distance {
-    Some(Ok(distances)) => find_max_daily_distance(distances.clone()),
-    Some(Err(_)) => 0.0, 
-    None => 0.0,
+  // let max_daily_distance = match month_daily_distance {
+  //   Some(Ok(distances)) => find_max_daily_distance(distances.clone()),
+    // Some(Err(_)) => 0.0, 
+    // None => 0.0,
+  // };
+
+  let new_bar_percentage = match month_daily_distance {
+    Some(Ok(distance)) => apply_bar_percentage(distance.clone()),
+    Some(Err(_)) => vec![], 
+    None => vec![],
   };
+  info!("{:#?}", new_bar_percentage);
 
-  info!("{}", max_daily_distance);
-  let rounded_tenth = round_up_to_nearest_10(max_daily_distance);
 
-  info!("{}", rounded_tenth);
+
+  // info!("{}", max_daily_distance);
+  //let rounded_tenth = round_up_to_nearest_10(max_daily_distance);
+
+  //info!("{}", rounded_tenth);
 
   let mut window_size = use_signal(|| (0, 0));
   let mut element_size = use_signal(|| (0, 0));
