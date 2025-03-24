@@ -33,27 +33,12 @@ fn App() -> Element {
 
   let month_daily_distance = &*month_daily_distance_unread.read();
 
-  info!("{:#?}", month_daily_distance);
-
-  // let max_daily_distance = match month_daily_distance {
-  //   Some(Ok(distances)) => find_max_daily_distance(distances.clone()),
-    // Some(Err(_)) => 0.0, 
-    // None => 0.0,
-  // };
-
-  let new_bar_percentage = match month_daily_distance {
+  let month_daily_percentage = match month_daily_distance {
     Some(Ok(distance)) => apply_bar_percentage(distance.clone()),
     Some(Err(_)) => vec![], 
     None => vec![],
   };
-  info!("{:#?}", new_bar_percentage);
-
-
-
-  // info!("{}", max_daily_distance);
-  //let rounded_tenth = round_up_to_nearest_10(max_daily_distance);
-
-  //info!("{}", rounded_tenth);
+  info!("{:#?}", month_daily_percentage);
 
   let mut window_size = use_signal(|| (0, 0));
   let mut element_size = use_signal(|| (0, 0));
@@ -302,19 +287,35 @@ fn App() -> Element {
             }
           }
           div {  
-            class: "w-2/3 max-sm:w-full flex flex-col gap-6 h-60",
+            class: "w-2/3 max-sm:w-full flex flex-col gap-6",
             id: "first-graph",
+            p {  
+              class: "text-center text-2xl",
+              "Running"
+            }
             div {  
-              class: "w-full h-full flex flex-row gap-3 max-lg:gap-2 max-sm:gap-[6px]",
-              for _ in (0..28) {
-                div {
-                  //style: format!("width: {}px; height: 100%; background-color: red;", gl),
-                  class: "w-full h-full bg-red-500"
+              class: "flex flex-col gap-4 w-full h-full",
+              div {  
+                class: "flex flex-row justify-between",
+                p { 
+                  "2025 Febuary daily running distance"
+                }
+                p {  
+                  "Selector"
                 }
               }
-              
-
-
+              div {  
+                class: "w-full h-60 flex flex-row-reverse gap-2 max-sm:gap-1 rotate-180 bg-white p-2 rounded-md opacity-90",
+                for bar in month_daily_percentage {
+                  div {
+                    style: format!(
+                      "width: 100%; height: {}%; background-color: #4b5563;",
+                      bar.percentage
+                    ),
+                    class: " rounded-md z-10"
+                  }
+                }
+              }
             }
           }
         }
