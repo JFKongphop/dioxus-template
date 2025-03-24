@@ -206,17 +206,8 @@
   .sticky {
     position: sticky;
   }
-  .z-2 {
-    z-index: 2;
-  }
   .col-span-1 {
     grid-column: span 1 / span 1;
-  }
-  .m-2 {
-    margin: calc(var(--spacing) * 2);
-  }
-  .mt-2 {
-    margin-top: calc(var(--spacing) * 2);
   }
   .block {
     display: block;
@@ -239,12 +230,6 @@
   .table {
     display: table;
   }
-  .h-0 {
-    height: calc(var(--spacing) * 0);
-  }
-  .h-1 {
-    height: calc(var(--spacing) * 1);
-  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
@@ -265,9 +250,6 @@
   }
   .h-8 {
     height: calc(var(--spacing) * 8);
-  }
-  .h-9 {
-    height: calc(var(--spacing) * 9);
   }
   .h-20 {
     height: calc(var(--spacing) * 20);
@@ -290,9 +272,6 @@
   .min-h-screen {
     min-height: 100vh;
   }
-  .w-0 {
-    width: calc(var(--spacing) * 0);
-  }
   .w-1 {
     width: calc(var(--spacing) * 1);
   }
@@ -314,17 +293,8 @@
   .w-3\/5 {
     width: calc(3/5 * 100%);
   }
-  .w-4 {
-    width: calc(var(--spacing) * 4);
-  }
-  .w-6 {
-    width: calc(var(--spacing) * 6);
-  }
   .w-8 {
     width: calc(var(--spacing) * 8);
-  }
-  .w-9 {
-    width: calc(var(--spacing) * 9);
   }
   .w-10 {
     width: calc(var(--spacing) * 10);
@@ -425,29 +395,14 @@
   .bg-red-500 {
     background-color: var(--color-red-500);
   }
-  .p-0 {
-    padding: calc(var(--spacing) * 0);
-  }
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
-  .p-3 {
-    padding: calc(var(--spacing) * 3);
-  }
   .p-4 {
     padding: calc(var(--spacing) * 4);
-  }
-  .p-5 {
-    padding: calc(var(--spacing) * 5);
-  }
-  .p-6 {
-    padding: calc(var(--spacing) * 6);
-  }
-  .p-7 {
-    padding: calc(var(--spacing) * 7);
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
@@ -541,30 +496,6 @@
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-  .\[e\:��I\] {
-    e: � I;
-  }
-  .\[m\:\6 �\1 _\11 �T�6Ϯ\8 �\1 \] {
-    m:   �T 6Ϯ ;
-  }
-  .\[m\:\6 �\1 _Q�T�6Ϯ\8 �\1 \] {
-    m:   Q�T 6Ϯ ;
-  }
-  .\[m\:\6 �\1 _V�T�6Ϯ\8 �\1 \] {
-    m:   V�T 6Ϯ ;
-  }
-  .\[m\:\6 �\1 _y�T�6Ϯ\8 �\1 \] {
-    m:   y�T 6Ϯ ;
-  }
-  .\[m\:\6 �\1 _\~�T�6Ϯ\8 �\1 \] {
-    m:   ~�T 6Ϯ ;
-  }
-  .\[m\:\6 �\1 _��T�6Ϯ\8 �\1 \] {
-    m:   ��T 6Ϯ ;
-  }
-  .\[w\:�\1d B�\] {
-    w:  B�;
   }
   .hover\:border-white {
     &:hover {

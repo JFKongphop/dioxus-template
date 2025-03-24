@@ -35,7 +35,7 @@ fn App() -> Element {
   info!("{:#?}", month_daily_distance);
 
   let max_daily_distance = match month_daily_distance {
-    Some(Ok(distances)) => find_max_daily_distance(Some(distances.clone())),
+    Some(Ok(distances)) => find_max_daily_distance(distances.clone()),
     Some(Err(_)) => 0.0, 
     None => 0.0,
   };
@@ -67,7 +67,7 @@ fn App() -> Element {
     gl.set(graph_lenght);
   });
 
-  info!("{:?}", gl);
+  // info!("{:?}", gl);
 
   
   use_effect(move || {
