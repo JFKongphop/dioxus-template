@@ -18,26 +18,4 @@ pub fn apply_bar_percentage(date_distance: Vec<DateDistance>) -> Vec<DateDistanc
     }).collect();
 
   applied_distance_percentage
-  
-  
-  // date_distance
-  //   .into_iter()
-  //   .map(|item| item.distance)
-  //   .max_by(|a, b| a
-  //     .partial_cmp(b)
-  //     .unwrap_or(std::cmp::Ordering::Equal)
-  //   )
-  //   .unwrap_or(0.0)
 }
-
-// let transformed_dates: Vec<EnhancedDateDistance> = dates
-//   .into_iter()
-//   .map(|item| {
-//       let new_distance = (item.distance / 30.0) * 100.0;
-//       EnhancedDateDistance {
-//           date: item.date,
-//           distance: new_distance,
-//           percentage: new_distance / 100.0, // Example percentage calculation
-//       }
-//   })
-//   .collect();
