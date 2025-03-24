@@ -10,6 +10,7 @@ use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 use dioxus_vercel::utils::fetch_api::get_month_daily_distance;
+use dioxus_vercel::utils::number::{find_max_daily_distance, round_up_to_nearest_10};
 use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
 use wasm_bindgen::prelude::Closure;
@@ -27,17 +28,27 @@ fn main() {
 
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
-  let month_daily_distance = use_resource(move || get_month_daily_distance());
+  let month_daily_distance_unread = use_resource(move || get_month_daily_distance());
 
-  let a = &*month_daily_distance.read();
-  
-  info!("{:#?}", a);
+  let month_daily_distance = &*month_daily_distance_unread.read();
+
+  info!("{:#?}", month_daily_distance);
+
+  let max_daily_distance = match month_daily_distance {
+    Some(Ok(distances)) => find_max_daily_distance(Some(distances.clone())),
+    Some(Err(_)) => 0.0, 
+    None => 0.0,
+  };
+
+  info!("{}", max_daily_distance);
+  let rounded_tenth = round_up_to_nearest_10(max_daily_distance);
+
+  info!("{}", rounded_tenth);
 
   let mut window_size = use_signal(|| (0, 0));
   let mut element_size = use_signal(|| (0, 0));
   let mut gl = use_signal(|| 0);
 
-  let cursor_position = use_signal(|| (0, 0));
   
   use_effect(move || {
     let window_data = WindowData::new();
