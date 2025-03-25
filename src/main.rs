@@ -175,7 +175,9 @@ fn App() -> Element {
           }
           p {
             class: "text-lg opacity-45",
-            "I’m pursuing studies in Financial Engineering but have a strong interest in Computer Science, particularly in Blockchain technology and Full-Stack development."
+            "I’m pursuing studies in Financial Engineering but have a strong interest in Computer Science,"
+            br {  }
+            "particularly in Blockchain technology and Full-Stack development."
             br { }
             "I’m also passionate about track distance running."
           }
