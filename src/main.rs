@@ -9,8 +9,9 @@ use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
+use dioxus_vercel::types::running_response_types::TotalResponse;
 use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
-use dioxus_vercel::utils::fetch_api::get_month_daily_distance;
+use dioxus_vercel::utils::fetch_api::{get_month_daily_distance, get_total_distance};
 use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
 use wasm_bindgen::prelude::Closure;
@@ -28,8 +29,10 @@ fn main() {
 fn App() -> Element {
   let contribution = use_resource(move || github_contribution());
   let month_daily_distance_unread = use_resource(move || get_month_daily_distance());
+  let total_distance_unread = use_resource(move || get_total_distance());
 
   let month_daily_distance = &*month_daily_distance_unread.read();
+  let total_distance = &*total_distance_unread.read();
 
   let month_daily_percentage = match month_daily_distance {
     Some(Ok(distance)) => apply_bar_percentage(distance.clone()),
@@ -38,6 +41,12 @@ fn App() -> Element {
   };
   info!("{:#?}", month_daily_percentage);
 
+  let total_distance = match total_distance {
+    Some(Ok(total)) => total.clone(),
+    Some(Err(_)) => TotalResponse { distance: 0.0, running_activity: 0, running_day: 0 },
+    None => TotalResponse { distance: 0.0, running_activity: 0, running_day: 0 },
+  };
+  
   let mut window_size = use_signal(|| (0, 0));
   let mut element_size = use_signal(|| (0, 0));
   let mut gl = use_signal(|| 0);
@@ -61,6 +70,8 @@ fn App() -> Element {
   });
 
   // info!("{:?}", gl);
+
+  let a = 1111;
 
   
   use_effect(move || {
@@ -292,6 +303,66 @@ fn App() -> Element {
             p {  
               class: "text-center text-2xl",
               "Running"
+            }
+            div {  
+              class: "flex flex-row max-sm:flex-col max-sm:gap-2 justify-between w-full max-sm:hidden border-b pb-2",
+              div { 
+                class: "flex sm:justify-center items-center w-full",
+                p {
+                  class: "text-xl", 
+                  "{total_distance.running_activity} activities" 
+                }
+              }
+              div { 
+                class: "flex sm:justify-center items-center w-full",
+                p {
+                  class: "text-xl", 
+                  "{total_distance.distance:.3} km." 
+                }
+              }
+              div { 
+                class: "flex sm:justify-center items-center w-full",
+                p {
+                  class: "text-xl", 
+                  "{total_distance.running_day} days" 
+                }
+              }
+            }
+            div {  
+              class: "flex flex-row max-sm:gap-2 justify-between w-full sm:hidden border-b pb-2",
+              div { 
+                class: "flex flex-col justify-center items-center w-full",
+                p {
+                  class: "text-lg", 
+                  "{total_distance.running_activity} " 
+                }
+                p {  
+                  class: "text-xs",
+                  "activities"
+                }
+              }
+              div { 
+                class: "flex flex-col justify-center items-center w-full",
+                p {
+                  class: "text-lg", 
+                  "{total_distance.distance:.3} " 
+                }
+                p {  
+                  class: "text-xs",
+                  "km."
+                }
+              }
+              div { 
+                class: "flex flex-col justify-center items-center w-full",
+                p {
+                  class: "text-lg", 
+                  "{total_distance.running_day} " 
+                }
+                p {  
+                  class: "text-xs",
+                  "days"
+                }
+              }
             }
             div {  
               class: "flex flex-col gap-4 w-full h-full",

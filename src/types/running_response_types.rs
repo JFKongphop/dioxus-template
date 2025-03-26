@@ -7,7 +7,6 @@ pub struct DateDistance {
   pub distance: f64,
 }
 
-
 #[allow(dead_code)]
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DateDistancePercentage {
@@ -22,7 +21,7 @@ pub struct DateDistanceResponse {
   pub date_distance: Vec<DateDistance>,
 }
 
-#[derive(Serialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct TotalResponse {
   pub distance: f64,
@@ -31,7 +30,7 @@ pub struct TotalResponse {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct PaceGroup {
   pub pace: String,
   pub activity: u32,
@@ -39,13 +38,13 @@ pub struct PaceGroup {
   pub percentage: f64,
 }
 
-#[derive(Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct PaceGroupResponse {
   pub pace_groups: Vec<PaceGroup>,
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DateDistancePaceHr {
   pub date: String,
   pub distance: f64,
@@ -53,7 +52,7 @@ pub struct DateDistancePaceHr {
   pub hr: f64,
 }
 
-#[derive(Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DateDistancePaceHrResponse {
   pub table_data: Vec<DateDistancePaceHr>,

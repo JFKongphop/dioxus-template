@@ -1,4 +1,4 @@
-use crate::types::running_response_types::{DateDistance, DateDistanceResponse};
+use crate::types::running_response_types::{DateDistance, DateDistanceResponse, TotalResponse};
 use reqwest::{Client, Error};
 use serde::de::DeserializeOwned;
 
@@ -24,4 +24,11 @@ pub async fn get_month_daily_distance() -> Result<Vec<DateDistance>, Error> {
   let date_distance = response.date_distance;
 
   Ok(date_distance)
+}
+
+pub async fn get_total_distance() -> Result<TotalResponse, Error> {
+  let path = "/total";
+  let response: TotalResponse = fetch_running_data(path).await?;
+  
+  Ok(response)
 }

@@ -7,6 +7,9 @@ bl:
 dx:
 	dx serve --port 5173
 
+api:
+	cd .. && cd running-api && make run
+
 ### INTERNAL COMMAND
 BASH := ./bash-request/
 
