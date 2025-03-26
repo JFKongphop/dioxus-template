@@ -6,7 +6,7 @@ async fn fetch_running_data<T>(path: &str) -> Result<T, Error>
 where 
   T: DeserializeOwned
 {
-  let url = format!("https://running-api-1007595656483.asia-east2.run.app/api/v1{}", path);
+  let url = format!("http://localhost:4000/api/v1{}", path);
   
   Ok(Client::new()
     .get(url)

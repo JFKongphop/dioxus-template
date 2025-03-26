@@ -4,3 +4,4 @@
 .DS_Store
 target/
 !target/dx/dioxus-vercel/release/web/public
+bash-request

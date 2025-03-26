@@ -11,12 +11,10 @@ use dioxus_vercel::components::cards::tech_stack_description::TechStackDescripti
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
 use dioxus_vercel::utils::fetch_api::get_month_daily_distance;
-use dioxus_vercel::utils::number::{find_max_daily_distance, round_up_to_nearest_10};
 use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
 use wasm_bindgen::prelude::Closure;
 use wasm_bindgen::JsCast;
-use web_sys::console::info;
 
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
