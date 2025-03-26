@@ -9,6 +9,7 @@ use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
 use dioxus_vercel::components::cards::total_card::TotalCard;
+use dioxus_vercel::components::cards::total_data_card::TotaDatalCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 use dioxus_vercel::types::running_response_types::TotalResponse;
 use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
@@ -303,64 +304,40 @@ fn App() -> Element {
             TotalCard {  
               window_size: "max-sm",
               element: rsx!{
-                div { 
-                  class: "flex justify-center items-center w-full",
-                  p {
-                    class: "text-xl", 
-                    "{total_distance.running_activity} activities" 
-                  }
+                TotaDatalCard {  
+                  window_size: "max-sm",
+                  data: total_distance.running_activity.to_string(),
+                  unit: "activities"
                 }
-                div { 
-                  class: "flex justify-center items-center w-full",
-                  p {
-                    class: "text-xl", 
-                    "{total_distance.distance:.3} km." 
-                  }
+                TotaDatalCard {  
+                  window_size: "max-sm",
+                  data: format!("{:.3}", total_distance.distance),
+                  unit: "km."
                 }
-                div { 
-                  class: "flex justify-center items-center w-full",
-                  p {
-                    class: "text-xl", 
-                    "{total_distance.running_day} days" 
-                  }
+                TotaDatalCard {  
+                  window_size: "max-sm",
+                  data: total_distance.running_day.to_string(),
+                  unit: "days"
                 }
               }
             }
             TotalCard {  
               window_size: "sm",
               element: rsx!{
-                div { 
-                  class: "flex flex-col justify-center items-center w-full",
-                  p {
-                    class: "text-lg", 
-                    "{total_distance.running_activity} " 
-                  }
-                  p {  
-                    class: "text-xs",
-                    "activities"
-                  }
+                TotaDatalCard {  
+                  window_size: "sm",
+                  data: total_distance.running_activity.to_string(),
+                  unit: "activities"
                 }
-                div { 
-                  class: "flex flex-col justify-center items-center w-full",
-                  p {
-                    class: "text-lg", 
-                    "{total_distance.distance:.3} " 
-                  }
-                  p {  
-                    class: "text-xs",
-                    "km."
-                  }
+                TotaDatalCard {  
+                  window_size: "sm",
+                  data: format!("{:.3}", total_distance.distance),
+                  unit: "km."
                 }
-                div { 
-                  class: "flex flex-col justify-center items-center w-full",
-                  p {
-                    class: "text-lg", 
-                    "{total_distance.running_day} " 
-                  }
-                  p {  
-                    class: "text-xs",
-                    "days"
-                  }
+                TotaDatalCard {  
+                  window_size: "sm",
+                  data: total_distance.running_day.to_string(),
+                  unit: "days"
                 }
               }
             }
