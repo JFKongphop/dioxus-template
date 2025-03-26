@@ -68,11 +68,6 @@ fn App() -> Element {
 
     gl.set(graph_lenght);
   });
-
-  // info!("{:?}", gl);
-
-  let a = 1111;
-
   
   use_effect(move || {
     let window = web_sys::window().unwrap();
