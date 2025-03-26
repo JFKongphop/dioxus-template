@@ -8,6 +8,7 @@ use dioxus_free_icons::Icon;
 use dioxus_vercel::components::cards::link_card::LinkCard;
 use dioxus_vercel::components::cards::tech_stack_card::TechStackCard;
 use dioxus_vercel::components::cards::tech_stack_description::TechStackDescriptionCard;
+use dioxus_vercel::components::cards::total_card::TotalCard;
 use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 use dioxus_vercel::types::running_response_types::TotalResponse;
 use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
@@ -299,63 +300,67 @@ fn App() -> Element {
               class: "text-center text-2xl",
               "Running"
             }
-            div {  
-              class: "flex flex-row max-sm:flex-col max-sm:gap-2 justify-between w-full max-sm:hidden border-b pb-2",
-              div { 
-                class: "flex sm:justify-center items-center w-full",
-                p {
-                  class: "text-xl", 
-                  "{total_distance.running_activity} activities" 
+            TotalCard {  
+              window_size: "max-sm",
+              element: rsx!{
+                div { 
+                  class: "flex justify-center items-center w-full",
+                  p {
+                    class: "text-xl", 
+                    "{total_distance.running_activity} activities" 
+                  }
                 }
-              }
-              div { 
-                class: "flex sm:justify-center items-center w-full",
-                p {
-                  class: "text-xl", 
-                  "{total_distance.distance:.3} km." 
+                div { 
+                  class: "flex justify-center items-center w-full",
+                  p {
+                    class: "text-xl", 
+                    "{total_distance.distance:.3} km." 
+                  }
                 }
-              }
-              div { 
-                class: "flex sm:justify-center items-center w-full",
-                p {
-                  class: "text-xl", 
-                  "{total_distance.running_day} days" 
+                div { 
+                  class: "flex justify-center items-center w-full",
+                  p {
+                    class: "text-xl", 
+                    "{total_distance.running_day} days" 
+                  }
                 }
               }
             }
-            div {  
-              class: "flex flex-row max-sm:gap-2 justify-between w-full sm:hidden border-b pb-2",
-              div { 
-                class: "flex flex-col justify-center items-center w-full",
-                p {
-                  class: "text-lg", 
-                  "{total_distance.running_activity} " 
+            TotalCard {  
+              window_size: "sm",
+              element: rsx!{
+                div { 
+                  class: "flex flex-col justify-center items-center w-full",
+                  p {
+                    class: "text-lg", 
+                    "{total_distance.running_activity} " 
+                  }
+                  p {  
+                    class: "text-xs",
+                    "activities"
+                  }
                 }
-                p {  
-                  class: "text-xs",
-                  "activities"
+                div { 
+                  class: "flex flex-col justify-center items-center w-full",
+                  p {
+                    class: "text-lg", 
+                    "{total_distance.distance:.3} " 
+                  }
+                  p {  
+                    class: "text-xs",
+                    "km."
+                  }
                 }
-              }
-              div { 
-                class: "flex flex-col justify-center items-center w-full",
-                p {
-                  class: "text-lg", 
-                  "{total_distance.distance:.3} " 
-                }
-                p {  
-                  class: "text-xs",
-                  "km."
-                }
-              }
-              div { 
-                class: "flex flex-col justify-center items-center w-full",
-                p {
-                  class: "text-lg", 
-                  "{total_distance.running_day} " 
-                }
-                p {  
-                  class: "text-xs",
-                  "days"
+                div { 
+                  class: "flex flex-col justify-center items-center w-full",
+                  p {
+                    class: "text-lg", 
+                    "{total_distance.running_day} " 
+                  }
+                  p {  
+                    class: "text-xs",
+                    "days"
+                  }
                 }
               }
             }
