@@ -1,4 +1,5 @@
 #![allow(non_snake_case)]
+use dioxus::html::br;
 use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fa_brands_icons::{FaGithub, FaLinkedin, FaMedium};
@@ -14,6 +15,7 @@ use dioxus_vercel::constants::tech_stack_data::TECH_STACK;
 use dioxus_vercel::types::running_response_types::TotalResponse;
 use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
 use dioxus_vercel::utils::fetch_api::{get_month_daily_distance, get_total_distance};
+use dioxus_vercel::utils::number::{find_max_daily_distance, round_up_to_nearest_10};
 use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
 use wasm_bindgen::prelude::Closure;
@@ -36,12 +38,24 @@ fn App() -> Element {
   let month_daily_distance = &*month_daily_distance_unread.read();
   let total_distance = &*total_distance_unread.read();
 
+
+
   let month_daily_percentage = match month_daily_distance {
     Some(Ok(distance)) => apply_bar_percentage(distance.clone()),
     Some(Err(_)) => vec![], 
     None => vec![],
   };
-  info!("{:#?}", month_daily_percentage);
+  // info!("{:#?}", month_daily_percentage);
+
+  let a = match month_daily_distance {
+    Some(Ok(distance)) => find_max_daily_distance(distance.clone()),
+    Some(Err(_)) => 0.0, 
+    None => 0.0,
+  };
+  let rounded_max_distance = round_up_to_nearest_10(a);
+
+  info!("{}", rounded_max_distance);
+
 
   let total_distance = match total_distance {
     Some(Ok(total)) => total.clone(),
@@ -75,6 +89,8 @@ fn App() -> Element {
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
     let graph = document.get_element_by_id("first-graph").unwrap();
+
+    let b = graph.get_bounding_client_rect();
 
     let closure = Closure::wrap(Box::new(move 
     |event: web_sys::MouseEvent| {
@@ -296,7 +312,6 @@ fn App() -> Element {
           }
           div {  
             class: "w-2/3 max-sm:w-full flex flex-col gap-6",
-            id: "first-graph",
             p {  
               class: "text-center text-2xl",
               "Running"
@@ -353,14 +368,36 @@ fn App() -> Element {
                 }
               }
               div {  
-                class: "w-full h-60 flex flex-row-reverse gap-2 max-sm:gap-1 rotate-180 bg-white p-2 rounded-md opacity-90",
-                for bar in month_daily_percentage {
-                  div {
-                    style: format!(
-                      "width: 100%; height: {}%; background-color: #4b5563;",
-                      bar.percentage
-                    ),
-                    class: " rounded-md z-10"
+                class: "w-full h-60 flex flex-row-reverse gap-2 max-sm:gap-1 bg-white rounded-md opacity-90 relative",
+                id: "first-graph",
+                // div {  
+                //   class: "absolute top-[10px] rotate-180 w-full border border-red-500 h-2"
+                // }
+                // div {  
+                //   class: "absolute top-[100px] left-2 text-red-500 rotate-180 flex flex-row border border-red-500 w-[97%] max-sm:w-[91%] z-1"                
+                // }
+                div { 
+                  class: "absolute top-1 right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
+                  {format!("-{}", rounded_max_distance)}
+                }
+                div { 
+                  class: "absolute top-[120px] right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
+                  {format!("-{}", rounded_max_distance / 2.0)}
+                }
+                div { 
+                  class: "absolute bottom-0 right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
+                  "-0"
+                }
+                div {  
+                  class: "w-full h-full flex flex-row-reverse gap-2 max-sm:gap-1 rotate-180 bg-white p-2 pl-6 max-sm:pl-4 rounded-md opacity-90 relative",
+                  for bar in month_daily_percentage {
+                    div {
+                      style: format!(
+                        "width: 100%; height: {}%; background-color: #4b5563;",
+                        bar.percentage
+                      ),
+                      class: "rounded-md z-100"
+                    }
                   }
                 }
               }
