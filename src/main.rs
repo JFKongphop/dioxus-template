@@ -1,4 +1,5 @@
 #![allow(non_snake_case)]
+use chrono::Month;
 use dioxus::html::br;
 use dioxus::logger::tracing::info;
 use dioxus::prelude::*;
@@ -16,6 +17,7 @@ use dioxus_vercel::types::running_response_types::TotalResponse;
 use dioxus_vercel::utils::chart_percentage::apply_bar_percentage;
 use dioxus_vercel::utils::fetch_api::{get_month_daily_distance, get_total_distance};
 use dioxus_vercel::utils::number::{find_max_daily_distance, round_up_to_nearest_10};
+use dioxus_vercel::utils::times::month_number_to_name;
 use dioxus_vercel::utils::window_data::WindowData;
 use dioxus_vercel::utils::github_data::github_contribution;
 use wasm_bindgen::prelude::Closure;
@@ -25,6 +27,11 @@ const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
 const ZK_DEBIT: Asset = asset!("/assets/zkDebit.png");
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
+
+fn handle_input_update(mut value: Signal<String>, event: Event<FormData>) {
+  // value.set(value);
+ value.set(event.value().clone());
+}
 
 fn main() {
   launch(App);
@@ -37,6 +44,9 @@ fn App() -> Element {
 
   let month_daily_distance = &*month_daily_distance_unread.read();
   let total_distance = &*total_distance_unread.read();
+
+
+  // info!("{:?}", Month::April);
 
 
 
@@ -54,7 +64,7 @@ fn App() -> Element {
   };
   let rounded_max_distance = round_up_to_nearest_10(a);
 
-  info!("{}", rounded_max_distance);
+  // info!("{}", rounded_max_distance);
 
 
   let total_distance = match total_distance {
@@ -85,27 +95,31 @@ fn App() -> Element {
     gl.set(graph_lenght);
   });
   
-  use_effect(move || {
-    let window = web_sys::window().unwrap();
-    let document = window.document().unwrap();
-    let graph = document.get_element_by_id("first-graph").unwrap();
+  // use_effect(move || {
+  //   let window = web_sys::window().unwrap();
+  //   let document = window.document().unwrap();
+  //   let graph = document.get_element_by_id("first-graph").unwrap();
 
-    let b = graph.get_bounding_client_rect();
+  //   let b = graph.get_bounding_client_rect();
 
-    let closure = Closure::wrap(Box::new(move 
-    |event: web_sys::MouseEvent| {
-      info!("{:#?}", event.offset_x());
-    }) as Box<dyn FnMut(_)>);
+  //   let closure = Closure::wrap(Box::new(move 
+  //   |event: web_sys::MouseEvent| {
+  //     info!("{:#?}", event.offset_x());
+  //   }) as Box<dyn FnMut(_)>);
 
-    graph
-      .add_event_listener_with_callback(
-        "mousemove", 
-        closure.as_ref().unchecked_ref()
-      )
-      .expect("msg");
+  //   graph
+  //     .add_event_listener_with_callback(
+  //       "mousemove", 
+  //       closure.as_ref().unchecked_ref()
+  //     )
+  //     .expect("msg");
 
-    closure.forget();    
-  });
+  //   closure.forget();    
+  // });
+
+  let input_value = use_signal(|| String::from("2025-02"));
+
+  // info!("{:?}", month_number_to_name(&input_value.read()));
 
   rsx! {
     document::Stylesheet {
@@ -359,13 +373,23 @@ fn App() -> Element {
             div {  
               class: "flex flex-col gap-4 w-full h-full",
               div {  
-                class: "flex flex-row justify-between",
+                class: "flex flex-row justify-between items-center",
                 p { 
-                  "2025 Febuary daily running distance"
+                  {input_value}
                 }
-                p {  
-                  "Selector"
+                input {
+                  r#type: "month",
+                  value: "{input_value}",
+                  oninput: move |event| handle_input_update(input_value, event),
+                  class: "border focus:border-white focus:outline-none p-1"
                 }
+                // input {  
+                //   class: "border border-white rounded-lg text-red-500",
+                //   type: "month"
+                // }
+                // p {  
+                //   "Selector"
+                // }
               }
               div {  
                 class: "w-full h-60 flex flex-row-reverse gap-2 max-sm:gap-1 bg-white rounded-md opacity-90 relative",

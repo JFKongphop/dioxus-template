@@ -13,6 +13,7 @@ dioxus-charts = "0.3.1"
 dioxus-free-icons = { version = "0.9", features = ["font-awesome-brands", "font-awesome-solid"] }
 dioxus-tailwindcss = "0.8.0"
 lazy_static = "1.5.0"
+once_cell = "1.21.3"
 reqwest = { version = "0.12.12", features = ["json"] }
 serde = { version = "1.0.219", features = ["derive"] }
 wasm-bindgen = "0.2.100"
