@@ -78,22 +78,22 @@ fn App() -> Element {
   let mut gl = use_signal(|| 0);
 
   
-  use_effect(move || {
-    let window_data = WindowData::new();
-    let screen_size = window_data.screen_size();
-    let div_size = window_data.element_id_size("first-graph");
+  // use_effect(move || {
+  //   let window_data = WindowData::new();
+  //   let screen_size = window_data.screen_size();
+  //   let div_size = window_data.element_id_size("first-graph");
     
-    window_size.set(screen_size);
-    element_size.set(div_size);
-  });
+  //   window_size.set(screen_size);
+  //   element_size.set(div_size);
+  // });
   
-  let month_days = 30;
-  use_effect(move || {
-    let first_index = element_size.read().0;
-    let graph_lenght = (first_index - (month_days * 16)) / month_days;
+  // let month_days = 30;
+  // use_effect(move || {
+  //   let first_index = element_size.read().0;
+  //   let graph_lenght = (first_index - (month_days * 16)) / month_days;
 
-    gl.set(graph_lenght);
-  });
+  //   gl.set(graph_lenght);
+  // });
   
   // use_effect(move || {
   //   let window = web_sys::window().unwrap();
@@ -370,68 +370,68 @@ fn App() -> Element {
                 }
               }
             }
-            div {  
-              class: "flex flex-col gap-4 w-full h-full",
-              div {  
-                class: "flex flex-row justify-between items-center",
-                p { 
-                  {input_value}
-                }
-                input {
-                  r#type: "month",
-                  value: "{input_value}",
-                  oninput: move |event| handle_input_update(input_value, event),
-                  class: "border focus:border-white focus:outline-none p-1"
-                }
-                // input {  
-                //   class: "border border-white rounded-lg text-red-500",
-                //   type: "month"
-                // }
-                // p {  
-                //   "Selector"
-                // }
-              }
-              div {  
-                class: "w-full h-60 flex flex-row-reverse gap-2 max-sm:gap-1 bg-white rounded-md opacity-90 relative",
-                id: "first-graph",
-                // div {  
-                //   class: "absolute top-[10px] rotate-180 w-full border border-red-500 h-2"
-                // }
-                // div {  
-                //   class: "absolute top-[100px] left-2 text-red-500 rotate-180 flex flex-row border border-red-500 w-[97%] max-sm:w-[91%] z-1"                
-                // }
-                div { 
-                  class: "absolute top-1 right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
-                  {format!("-{}", rounded_max_distance)}
-                }
-                div { 
-                  class: "absolute top-[120px] right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
-                  {format!("-{}", rounded_max_distance / 2.0)}
-                }
-                div { 
-                  class: "absolute bottom-0 right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
-                  "-0"
-                }
-                div {  
-                  class: "w-full h-full flex flex-row-reverse gap-2 max-sm:gap-1 rotate-180 bg-white p-2 pl-6 max-sm:pl-4 rounded-md opacity-90 relative",
-                  for bar in month_daily_percentage {
-                    div {
-                      style: format!(
-                        "width: 100%; height: {}%; background-color: #4b5563;",
-                        bar.percentage
-                      ),
-                      class: "rounded-md z-100"
-                    }
-                  }
-                }
-              }
-            }
+            // div {  
+            //   class: "flex flex-col gap-4 w-full h-full",
+            //   // div {  
+            //   //   class: "flex flex-row justify-between items-center",
+            //   //   p { 
+            //   //     {input_value}
+            //   //   }
+            //   //   input {
+            //   //     r#type: "month",
+            //   //     value: "{input_value}",
+            //   //     oninput: move |event| handle_input_update(input_value, event),
+            //   //     class: "border focus:border-white focus:outline-none p-1"
+            //   //   }
+            //   //   // input {  
+            //   //   //   class: "border border-white rounded-lg text-red-500",
+            //   //   //   type: "month"
+            //   //   // }
+            //   //   // p {  
+            //   //   //   "Selector"
+            //   //   // }
+            //   // }
+            //   div {  
+            //     class: "w-full h-60 flex flex-row-reverse gap-2 max-sm:gap-1 bg-white rounded-md opacity-90 relative",
+            //     id: "first-graph",
+            //     // div {  
+            //     //   class: "absolute top-[10px] rotate-180 w-full border border-red-500 h-2"
+            //     // }
+            //     // div {  
+            //     //   class: "absolute top-[100px] left-2 text-red-500 rotate-180 flex flex-row border border-red-500 w-[97%] max-sm:w-[91%] z-1"                
+            //     // }
+            //     div { 
+            //       class: "absolute top-1 right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
+            //       {format!("-{}", rounded_max_distance)}
+            //     }
+            //     div { 
+            //       class: "absolute top-[120px] right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
+            //       {format!("-{}", rounded_max_distance / 2.0)}
+            //     }
+            //     div { 
+            //       class: "absolute bottom-0 right-1 text-[#4b5563] text-xs max-sm:text-[10px] z-1", 
+            //       "-0"
+            //     }
+            //     div {  
+            //       class: "w-full h-full flex flex-row-reverse gap-2 max-sm:gap-1 rotate-180 bg-white p-2 pl-6 max-sm:pl-4 rounded-md opacity-90 relative",
+            //       for bar in month_daily_percentage {
+            //         div {
+            //           style: format!(
+            //             "width: 100%; height: {}%; background-color: #4b5563;",
+            //             bar.percentage
+            //           ),
+            //           class: "rounded-md z-100"
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
           }
         }
       }
-      div {
-        class: "w-full h-[40px]"
-      }
+      // div {
+      //   class: "w-full h-[20px]"
+      // }
       div {
         class: "slider-container",
         div {
