@@ -282,15 +282,15 @@ fn App() -> Element {
                       "zkDebit is an innovative payment platform that leverages zero-knowledge proofs (ZKPs) to enhance privacy and security in digital transactions. Unlike traditional payment systems, zkDebit eliminates the need to share sensitive details such as card numbers, CVVs, or expiration dates with merchants. Instead, users generate and submit a cryptographic proof verifying their ownership of the card and transaction validity."
                     }
                   }
-                  div {  
+                  a {  
+                    href: "https://ethglobal.com/showcase/zkdebit-ypjir",
+                    target: "_blank",
                     class: "flex flex-row justify-between items-center",
                     p {
                       class: "text-base",
                       "(Backend and Smart Contract)"
                     }
-                    a {
-                      href: "https://ethglobal.com/showcase/zkdebit-ypjir",
-                      target: "_blank",
+                    div {
                       Icon {
                         width: 16,
                         height: 16,
