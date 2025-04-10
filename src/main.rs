@@ -431,7 +431,7 @@ fn App() -> Element {
       }
       // div {
       //   class: "w-full h-[20px]"
-      // }
+      // ..}
       div {
         class: "slider-container",
         div {
