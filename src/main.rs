@@ -144,7 +144,7 @@ fn App() -> Element {
               class: "w-8 h-8 rounded-full"
             }
             p {
-              class: "text-xl",
+              class: "text-2xl",
               "JFKongphop"
             }
           }
