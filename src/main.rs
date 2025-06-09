@@ -17,6 +17,7 @@ use dioxus_vercel::utils::github_data::github_contribution;
 const JFK_KONGPHOP: Asset = asset!("/assets/JFKongphop.jpg");
 const DIOXUS: Asset = asset!("/assets/dioxus.png");
 const ZK_DEBIT: Asset = asset!("/assets/zkDebit.png");
+const NOIR_WAREWOLF: Asset = asset!("/assets/noirWarewolf.png");
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
 fn main() {
@@ -266,7 +267,7 @@ fn App() -> Element {
               "Hackathons"
             }
             div {  
-              class: "flex flex-col",
+              class: "flex flex-col gap-8",
               div {  
                 class: "w-full flex flex-row max-sm:flex-col gap-4",
                 div {  
@@ -305,6 +306,47 @@ fn App() -> Element {
                   img {
                     src: ZK_DEBIT,
                     class: "rounded-2xl h-full w-full"
+                  }
+                }
+              }
+              div {  
+                class: "w-full flex flex-row max-sm:flex-col gap-4",
+                div {
+                  class: "w-2/5 max-sm:w-full h-[300px]",
+                  img {
+                    src: NOIR_WAREWOLF,
+                    class: "rounded-2xl h-full w-full"
+                  }
+                }
+                div {  
+                  class: "w-3/5 max-sm:w-full flex flex-col justify-between gap-2",
+                  div {  
+                    class: "w-full flex flex-col gap-2",
+                    p {  
+                      class: "text-xl text-right",
+                      "Warewolf in Noirland"
+                    }
+                    p {  
+                      class: "text-base opacity-50",
+                      "Warewolf in Noirland is zk for binding role of player in the warewolf game by zero knowledge proof to protected cheating player this game we focus on noirlang to create the proof for this hack and we have 3 part is server for circuit, web socket for real time, and desktop game (We got Noteable in hackation in 20 teams from hundred)"
+                    }
+                  }
+                  a {  
+                    href: "https://github.com/lorta04/noirhack-noir-werewolf",
+                    target: "_blank",
+                    class: "flex flex-row justify-between items-center",
+                    div {
+                      Icon {
+                        width: 16,
+                        height: 16,
+                        fill: "white",
+                        icon: FaLink,
+                      }
+                    }
+                    p {
+                      class: "text-base",
+                      "(Backend and Circuit)"
+                    }
                   }
                 }
               }
