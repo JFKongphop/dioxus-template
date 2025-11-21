@@ -134,7 +134,7 @@ fn App() -> Element {
       // },
       class: "min-h-screen",
       div {
-        class: "first-screen w-full h-screen flex flex-col gap-4 justify-center items-center p-8",
+        class: "first-screen w-full h-screen text-white flex flex-col gap-4 justify-center items-center p-8",
         id: "first-screen",
         div {
           class: "w-full flex sm:justify-center",

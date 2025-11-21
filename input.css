@@ -3,8 +3,32 @@
 ::-webkit-scrollbar {
   display: none;
 }
-
 body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2VobjlkeHlvemxscGM4NHZmMjQzaXRtajlpNWc5Zjk0dzZxd3BiZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1ai4nInHtjyP31eXGi/giphy.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(12px);
+  transform: scale(1.1);
+  transform-origin: center;
+  z-index: -1;
+}
+
+
+/* body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
@@ -22,7 +46,7 @@ body {
 
 .second-screen {
   background: #111827;
-}
+} */
 
 @theme {
   --color-dark-shade: #111827;
@@ -76,79 +100,3 @@ body {
   background: linear-gradient(to top, #4b5563, #111827);
 }
 
-
-/* .dx-chart-bar {
-  fill: #4CAF50;
-} */
-
-.dx-chart-bar {
-  fill: #4b5563; 
-  color: blue;
-}
-
-.dx-bar {
-  background: yellow;
-  fill: green;
-  color: blue
-}
-
-/* .dx-chart-bar {
-  fill: green; 
-  color: green;
-}
-
-.dx-bar {
-  fill: green;
-  color: blue
-}
-
-.dx-bar-group {
-  fill: green;
-}
-
-.dx-bar-label {
-  fill: red;
-}
-
-.dx-grid {
-  fill: red;
-}
-
-.dx-grid-line {
-  fill: red;
-}
-
-.dx-grid-label {
-  fill: red;
-}
-
-.dx-grid-labels {
-  fill: red;
-} */
-
-.dx-bar-group {
-  fill: green;
-  color: green
-}
-
-.dx-bar-label {
-  fill: blue;
-}
-
-.dx-grid {
-  fill: yellow;
-  color: yellow
-}
-
-.dx-grid-label {
-  fill: green;
-}
-
-.group:hover .group-hover\:block {
-	display: block;
-}
-
-/* input:focus {
-  outline: none;
-  border: 1px solid white;
-} */
