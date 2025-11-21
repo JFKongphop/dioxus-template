@@ -132,9 +132,9 @@ fn App() -> Element {
       // onmousemove: move |evt| {
       //   info!("{:#?}", evt);
       // },
-      class: "min-h-screen",
+      class: "min-h-screen text-white",
       div {
-        class: "first-screen w-full h-screen text-white flex flex-col gap-4 justify-center items-center p-8",
+        class: "first-screen w-full h-screen flex flex-col gap-4 justify-center items-center p-8",
         id: "first-screen",
         div {
           class: "w-full flex sm:justify-center",
@@ -210,7 +210,7 @@ fn App() -> Element {
         class: "second-screen w-full min-h-screen flex flex-col gap-4 justify-center items-center p-8",
         div {
           id: "first-screen",
-          class: "w-full h-full flex flex-col gap-8 items-center text-lg max-sm:text-xs justify-center",
+          class: "w-full h-full flex flex-col gap-8 items-center text-lg max-sm:text-xs justify-center text-white",
           div {
             class: "w-2/3 max-sm:w-full flex flex-col gap-6",
             match &*contribution.read() {
@@ -327,7 +327,7 @@ fn App() -> Element {
                       "Warewolf in Noirland"
                     }
                     p {  
-                      class: "text-base opacity-50",
+                      class: "text-right opacity-50",
                       "Warewolf in Noirland is zk for binding role of player in the warewolf game by zero knowledge proof to protected cheating player this game we focus on noirlang to create the proof for this hack and we have 3 part is server for circuit, web socket for real time, and desktop game (We got Noteable in hackation in 20 teams from hundred)"
                     }
                   }
@@ -460,30 +460,30 @@ fn App() -> Element {
       // div {
       //   class: "w-full h-[20px]"
       // ..}
-      div {
-        class: "slider-container",
-        div {
-          class: "slider",
-          div {
-            class: "slide",
-            p {"POWERED BY"}
-            p {"DIOXUS"}
-            img {
-              src: DIOXUS,
-              class: "w-8 h-8"
-            }
-          }
-          div {
-            class: "slide",
-            p {"POWERED BY"}
-            p {"DIOXUS"}
-            img {
-              src: DIOXUS,
-              class: "w-8 h-8"
-            }
-          }
-        }
-      }
+      // div {
+      //   class: "slider-container",
+      //   div {
+      //     class: "slider",
+      //     div {
+      //       class: "slide",
+      //       p {"POWERED BY"}
+      //       p {"DIOXUS"}
+      //       img {
+      //         src: DIOXUS,
+      //         class: "w-8 h-8"
+      //       }
+      //     }
+      //     div {
+      //       class: "slide",
+      //       p {"POWERED BY"}
+      //       p {"DIOXUS"}
+      //       img {
+      //         src: DIOXUS,
+      //         class: "w-8 h-8"
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 }

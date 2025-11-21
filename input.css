@@ -21,7 +21,7 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(12px);
+  filter: blur(16px);
   transform: scale(1.1);
   transform-origin: center;
   z-index: -1;
@@ -99,4 +99,3 @@ body::before {
 .slider .slide:nth-child(4) {
   background: linear-gradient(to top, #4b5563, #111827);
 }
-
